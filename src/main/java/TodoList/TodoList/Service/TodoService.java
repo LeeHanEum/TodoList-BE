@@ -22,18 +22,20 @@ public class TodoService {
         return todoVoList;
     }
 
-    public void createTodoList(TodoDto todoDto) {
+    public Todo createTodoList(TodoDto todoDto) {
         Todo todo = Todo.builder()
                 .text(todoDto.getText())
                 .done(todoDto.isDone())
                 .build();
         todoRepository.save(todo);
+        return todo;
     }
 
-    public void updateTodoList(Long id, Boolean status) {
+    public Boolean updateTodoList(Long id, Boolean status) {
         Todo todo = todoRepository.findById(id).orElseThrow();
         todo.setDone(status);
         todoRepository.save(todo);
+        return status;
     }
 
     public void deleteTodoList(Long id) {
